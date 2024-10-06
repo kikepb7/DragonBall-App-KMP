@@ -12,9 +12,10 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.painterResource
 
 sealed class Routes(val route: String) {
-    data object Home : Routes("home")
-    data object Characters : Routes("characters")
-    data object Planets : Routes("planets")
+    data object Home: Routes("home")
+    data object Characters: Routes("characters")
+    data object Planets: Routes("planets")
+    data object Combats: Routes("combats")
 }
 
 @Serializable
@@ -46,6 +47,18 @@ sealed class ButtonHomeRoute {
             Icon(
                 painter = painterResource(Res.drawable.ic_planet),
                 contentDescription = "Planets icon",
+                modifier = Modifier.size(32.dp)
+            )
+        }
+    ): ButtonHomeRoute()
+
+    data class Combats(
+        override val route: String = Routes.Combats.route,
+        override val title: String = "COMBATS",
+        override val icon: @Composable () -> Unit = {
+            Icon(
+                painter = painterResource(Res.drawable.ic_planet),
+                contentDescription = "Combats icon",
                 modifier = Modifier.size(32.dp)
             )
         }
