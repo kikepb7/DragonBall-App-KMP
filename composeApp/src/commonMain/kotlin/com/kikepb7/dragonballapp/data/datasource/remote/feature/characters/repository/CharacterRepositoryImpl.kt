@@ -2,6 +2,7 @@ package com.kikepb7.dragonballapp.data.datasource.remote.feature.characters.repo
 
 import com.kikepb7.dragonballapp.data.datasource.remote.ApiService
 import com.kikepb7.dragonballapp.domain.feature.character.CharacterRepository
+import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterDetailModel
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 
 class CharacterRepositoryImpl(
@@ -17,4 +18,7 @@ class CharacterRepositoryImpl(
         return api.getAllCharacters().items.map { characterDto -> characterDto.dtoToCharacterModel() }
     }
 
+    override suspend fun getRandomCharacter(id: String): CharacterDetailModel {
+        return api.getSingleCharacter(id = id).dtoToCharacterDetailModel()
+    }
 }

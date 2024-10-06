@@ -15,7 +15,7 @@ sealed class Routes(val route: String) {
     data object Home: Routes("home")
     data object Characters: Routes("characters")
     data object Planets: Routes("planets")
-    data object Combats: Routes("combats")
+    data object Battles: Routes("battles")
 }
 
 @Serializable
@@ -52,8 +52,8 @@ sealed class ButtonHomeRoute {
         }
     ): ButtonHomeRoute()
 
-    data class Combats(
-        override val route: String = Routes.Combats.route,
+    data class Battles(
+        override val route: String = Routes.Battles.route,
         override val title: String = "COMBATS",
         override val icon: @Composable () -> Unit = {
             Icon(

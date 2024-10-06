@@ -8,6 +8,7 @@ import androidx.navigation.toRoute
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 import com.kikepb7.dragonballapp.ui.feature.characters.CharactersScreenView
 import com.kikepb7.dragonballapp.ui.feature.characters.detail.CharacterDetailScreen
+import com.kikepb7.dragonballapp.ui.feature.combats.BattlesScreen
 import com.kikepb7.dragonballapp.ui.feature.home.HomeScreenView
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -20,7 +21,8 @@ fun NavigationWrapper() {
         composable(route = Routes.Home.route) {
             HomeScreenView(
                 navigateToCharacters = { mainNavController.navigate(route = Routes.Characters.route) },
-                navigateToPlanets = { mainNavController.navigate(route = Routes.Planets.route) }
+                navigateToPlanets = { mainNavController.navigate(route = Routes.Planets.route) },
+                navigateToBattles = { mainNavController.navigate(route = Routes.Battles.route) }
             )
         }
 
@@ -37,6 +39,10 @@ fun NavigationWrapper() {
             val characterDetailEncoding = navBackStackEntry.toRoute<CharacterDetail>()
             val characterModel = Json.decodeFromString<CharacterModel>(string = characterDetailEncoding.characterModel)
             CharacterDetailScreen(characterModel = characterModel)
+        }
+
+        composable(route = Routes.Battles.route) {
+            BattlesScreen()
         }
     }
 }

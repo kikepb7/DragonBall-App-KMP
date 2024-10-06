@@ -32,7 +32,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun HomeScreenView(
     navigateToCharacters: () -> Unit,
-    navigateToPlanets: () -> Unit
+    navigateToPlanets: () -> Unit,
+    navigateToBattles: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -51,6 +52,12 @@ fun HomeScreenView(
             text = "PLANETS",
             icon = Res.drawable.ic_planet,
             onClick = navigateToPlanets
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        HomeOptionButton(
+            text = "BATTLES",
+            icon = Res.drawable.ic_planet,
+            onClick = navigateToBattles
         )
     }
 }
