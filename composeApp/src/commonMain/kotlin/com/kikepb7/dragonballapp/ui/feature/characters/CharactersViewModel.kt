@@ -1,5 +1,6 @@
 package com.kikepb7.dragonballapp.ui.feature.characters
 
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kikepb7.dragonballapp.domain.feature.character.CharacterRepository
@@ -16,6 +17,8 @@ class CharactersViewModel(
 
     private val _state = MutableStateFlow(CharactersState())
     val state: StateFlow<CharactersState?> = _state.asStateFlow()
+    private val _scrollState = MutableStateFlow(LazyGridState())
+    val scrollState: StateFlow<LazyGridState> = _scrollState
 
     init {
         getAllCharacters()

@@ -1,7 +1,6 @@
 package com.kikepb7.dragonballapp.data.datasource.remote.feature.characters.repository
 
 import com.kikepb7.dragonballapp.data.datasource.remote.ApiService
-import com.kikepb7.dragonballapp.data.datasource.remote.feature.characters.CharacterPagingSource
 import com.kikepb7.dragonballapp.domain.feature.character.CharacterRepository
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 
