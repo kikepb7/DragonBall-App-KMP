@@ -1,13 +1,14 @@
 package com.kikepb7.dragonballapp.ui.feature.battles
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -17,9 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import coil3.compose.AsyncImage
-import com.kikepb7.dragonballapp.ui.common.components.CustomButton
+import com.kikepb7.dragonballapp.ui.common.components.CustomTextShadow
+import com.kikepb7.dragonballapp.ui.theme.Gray
 import dragonballapp.composeapp.generated.resources.Res
+import dragonballapp.composeapp.generated.resources.battle_background
 import dragonballapp.composeapp.generated.resources.ic_placeholder
 import dragonballapp.composeapp.generated.resources.ic_vs_logo
 import org.jetbrains.compose.resources.painterResource
@@ -34,24 +38,41 @@ fun BattlesScreen(
     val state by battlesViewModel.state.collectAsState()
     val characters = state.twoRandomCharacters
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .background(Gray),
+        contentAlignment = Alignment.Center
     ) {
-        CharactersBattle(
-            firstCharacterImage = characters?.first()?.image,
-            secondCharacterImage = characters?.get(1)?.image
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .zIndex(1f),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            CharactersBattleButtons(
+                firstCharacterName = characters?.first()?.name,
+                secondCharacterName = characters?.get(1)?.name
+            )
+        }
+        Image(
+            modifier = Modifier
+                .fillMaxSize(),
+            painter = painterResource(resource = Res.drawable.battle_background),
+            contentScale = ContentScale.FillWidth,
+            contentDescription = "Background battle image"
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        CharactersBattleButtons(
-            firstCharacterName = characters?.first()?.name,
-            secondCharacterName = characters?.get(1)?.name,
-            firstCharacterOption = {},
-            secondCharacterOption = {}
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CharactersBattle(
+                firstCharacterImage = characters?.first()?.image,
+                secondCharacterImage = characters?.get(1)?.image
+            )
+        }
     }
 }
 
@@ -61,26 +82,27 @@ fun CharactersBattle(
     secondCharacterImage: String?
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
             model = firstCharacterImage,
             contentDescription = "First character",
             placeholder = painterResource(Res.drawable.ic_placeholder),
-            modifier = Modifier.size(150.dp)
-        )
-        Image(
-            painter = painterResource(resource = Res.drawable.ic_vs_logo),
-            contentScale = ContentScale.Fit,
-            contentDescription = "Versus logo",
-            modifier = Modifier.size(100.dp)
+            modifier = Modifier
+                .size(150.dp)
+                .clickable {  }
         )
         AsyncImage(
             model = secondCharacterImage,
             contentDescription = "Second character",
             placeholder = painterResource(Res.drawable.ic_placeholder),
-            modifier = Modifier.size(150.dp)
+            modifier = Modifier
+                .size(150.dp)
+                .clickable {  }
         )
     }
 }
@@ -89,20 +111,24 @@ fun CharactersBattle(
 fun CharactersBattleButtons(
     firstCharacterName: String?,
     secondCharacterName: String?,
-    firstCharacterOption: () -> Unit,
-    secondCharacterOption: () -> Unit
 ) {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (firstCharacterName != null) {
-            CustomButton(text = firstCharacterName, onClick = firstCharacterOption)
+        firstCharacterName?.let {
+            CustomTextShadow(text = firstCharacterName)
         }
-        if (secondCharacterName != null) {
-            CustomButton(text = secondCharacterName, onClick = secondCharacterOption)
+        Image(
+            painter = painterResource(resource = Res.drawable.ic_vs_logo),
+            contentScale = ContentScale.Fit,
+            contentDescription = "Versus logo",
+            modifier = Modifier.size(125.dp)
+        )
+        secondCharacterName?.let {
+            CustomTextShadow(text = secondCharacterName)
         }
     }
 }
