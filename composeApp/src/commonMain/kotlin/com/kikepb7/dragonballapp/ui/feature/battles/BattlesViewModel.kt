@@ -1,8 +1,8 @@
-package com.kikepb7.dragonballapp.ui.feature.combats
+package com.kikepb7.dragonballapp.ui.feature.battles
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterDetailModel
+import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 import com.kikepb7.dragonballapp.domain.feature.character.usecase.GetTwoRandomsCharactersUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 
 class BattlesViewModel(
     val getTwoRandomsCharactersUseCase: GetTwoRandomsCharactersUseCase,
-): ViewModel() {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(BattlesState())
     val state = _state.asStateFlow()
@@ -33,5 +33,5 @@ class BattlesViewModel(
 }
 
 data class BattlesState(
-    val twoRandomCharacters: List<CharacterDetailModel>? = null
+    val twoRandomCharacters: List<CharacterModel>? = null
 )

@@ -6,9 +6,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
+import com.kikepb7.dragonballapp.ui.feature.battles.BattlesScreen
 import com.kikepb7.dragonballapp.ui.feature.characters.CharactersScreenView
 import com.kikepb7.dragonballapp.ui.feature.characters.detail.CharacterDetailScreen
-import com.kikepb7.dragonballapp.ui.feature.combats.BattlesScreen
 import com.kikepb7.dragonballapp.ui.feature.home.HomeScreenView
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
