@@ -29,7 +29,9 @@ fun NavigationWrapper() {
         composable(route = Routes.Characters.route) {
             CharactersScreenView(
                 navigateToDetail = { characterModel ->
+                    // val characterId = characterModel.id
                     val encode = Json.encodeToString(value = characterModel)
+                    // mainNavController.navigate(route = "characterDetail/$characterId")
                     mainNavController.navigate(route = CharacterDetail(characterModel = encode))
                 }
             )
@@ -44,5 +46,14 @@ fun NavigationWrapper() {
         composable(route = Routes.Battles.route) {
             BattlesScreen()
         }
+
+        /*
+        composable(route = "characterDetail/{characterId}", arguments = listOF(navArgument("characterId) { type = NavType.IntType })) { navBackStackEntry ->
+            val characterId = navBackStackEntry.arguments?.getInt("characterId") ?: -1
+            val characterModel = viewModel.getCharacterById(characterId)
+
+            CharacterDetailScreen(characterModel = characterModel)
+        }
+        */
     }
 }
