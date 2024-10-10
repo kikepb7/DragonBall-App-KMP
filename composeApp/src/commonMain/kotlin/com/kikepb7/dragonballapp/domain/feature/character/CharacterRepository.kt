@@ -5,5 +5,5 @@ import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 
 interface CharacterRepository {
     suspend fun getAllCharacters(): List<CharacterModel>
-    suspend fun getRandomCharacter(id: String): CharacterDetailModel
+    suspend fun getSingleCharacter(id: String): CharacterDetailModel
 }

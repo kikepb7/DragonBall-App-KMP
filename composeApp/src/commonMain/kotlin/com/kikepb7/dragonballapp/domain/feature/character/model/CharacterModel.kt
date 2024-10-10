@@ -14,6 +14,4 @@ data class CharacterModel(
     val image: String,
     val affiliation: String,
     val deletedAt: String? = null,
-//    val originPlanet: OriginPlanetModel?= null,
-//    val transformation: List<TransformationDto> = emptyList()
 )

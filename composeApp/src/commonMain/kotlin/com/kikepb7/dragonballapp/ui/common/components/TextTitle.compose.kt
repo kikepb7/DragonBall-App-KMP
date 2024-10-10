@@ -44,7 +44,7 @@ fun TextTitle(text: String) {
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp,
             color = Black,
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
