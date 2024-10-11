@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kikepb7.dragonballapp.ui.theme.Black
+import com.kikepb7.dragonballapp.ui.theme.TitleSectionFont
 
 @Composable
 fun TextTitle(text: String) {
@@ -42,9 +42,9 @@ fun TextTitle(text: String) {
             modifier = Modifier.padding(bottom = 1.dp),
             text = text.uppercase(),
             fontWeight = FontWeight.Bold,
+            fontFamily = TitleSectionFont,
             fontSize = 24.sp,
-            color = Black,
-            style = MaterialTheme.typography.titleLarge
+            color = Black
         )
     }
 }

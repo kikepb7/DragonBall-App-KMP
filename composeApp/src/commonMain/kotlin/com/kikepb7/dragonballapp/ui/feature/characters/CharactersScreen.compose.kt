@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
+import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.Blue
 import com.kikepb7.dragonballapp.ui.theme.Orange
 import dragonballapp.composeapp.generated.resources.Res
@@ -47,7 +48,11 @@ fun CharactersScreenView(
     val state by characterViewModel.state.collectAsStateWithLifecycle()
     val listState = characterViewModel.scrollState.collectAsStateWithLifecycle().value
 
-    Column {
+    Column(
+        modifier = Modifier
+            .background(color = BackGroundHomePrimaryColor)
+    )
+    {
         state?.characters?.let { CharactersGridList(characters = it, onItemSelected = navigateToDetail, listState = listState) }
     }
 }
@@ -62,7 +67,6 @@ fun CharactersGridList(
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = Color.Gray)
             .padding(horizontal = 16.dp),
         columns = GridCells.Fixed(count = 2),
         state = listState,
@@ -75,60 +79,6 @@ fun CharactersGridList(
                 onItemSelected = { onItemSelected(it) }
             )
         }
-        /*when {
-            characters?.refresh is LoadState.Loading && characters.itemCount == 0 -> {
-                // Initial
-                item(span = { GridItemSpan(currentLineSpan = 2) }) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .size(size = 64.dp),
-                            color = Color.Green
-                        )
-                    }
-                }
-            }
-
-            characters?.loadState?.refresh is LoadState.NotLoading && characters.itemCount == 0 -> {
-                // Empty list
-                item {
-                    Text(text = "No characters to show :/")
-                }
-            }
-
-            else -> {
-                characters?.itemCount?.let {
-                    items(count = it) { position ->
-                        characters[position]?.let { characterModel ->
-                            CharacterItemList(
-                                characterModel = characterModel,
-                                onItemSelected = {}
-                            )
-                        }
-                    }
-                }
-                if (characters?.loadState?.append is LoadState.Loading) {
-                    item(span = { GridItemSpan(currentLineSpan = 2) }) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .height(100.dp),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator(
-                                modifier = Modifier
-                                    .size(size = 64.dp),
-                                color = Color.Green
-                            )
-                        }
-                    }
-                }
-            }
-        }*/
     }
 }
 

@@ -1,9 +1,9 @@
 package com.kikepb7.dragonballapp.ui.feature.characters.detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,24 +29,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 import com.kikepb7.dragonballapp.domain.model.TransformationModel
 import com.kikepb7.dragonballapp.ui.common.components.CustomFloatingActionButton
-import com.kikepb7.dragonballapp.ui.common.components.IconText
 import com.kikepb7.dragonballapp.ui.common.components.TextTitle
+import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
+import com.kikepb7.dragonballapp.ui.theme.CharacterDescriptionFont
+import com.kikepb7.dragonballapp.ui.theme.CharacterDetailsFont
 import com.kikepb7.dragonballapp.ui.theme.Gray
 import com.kikepb7.dragonballapp.ui.theme.Orange
 import dragonballapp.composeapp.generated.resources.Res
 import dragonballapp.composeapp.generated.resources.ic_dragon_ball_transformation
-import dragonballapp.composeapp.generated.resources.ic_empty_power
-import dragonballapp.composeapp.generated.resources.ic_full_power
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
@@ -71,7 +71,9 @@ fun CharacterDetailScreen(
         val bottomSheetState = rememberModalBottomSheetState()
 
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = BackGroundHomePrimaryColor)
         ) {
             Box(
                 modifier = Modifier
@@ -84,7 +86,7 @@ fun CharacterDetailScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
-                characterDetail.character?.characterModel?.let { CharacterPower(characterModel = it) }
+                characterDetail.character?.characterModel?.let { CharacterAffiliation(characterModel = it) }
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -143,19 +145,20 @@ fun MainCharacterDetail(characterModel: CharacterModel) {
             model = characterModel.image,
             contentDescription = "${characterModel.name} image",
             modifier = Modifier
-                .size(250.dp)
-                .padding(top = 32.dp),
+                .size(300.dp)
+                .padding(top = 32.dp)
+                .zIndex(1f),
             contentScale = ContentScale.Fit,
         )
-        Spacer(modifier = Modifier.height(16.dp))
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.Start
         ) {
             Text(
                 text = characterModel.race.uppercase(),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = CharacterDetailsFont,
                 color = Orange,
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
@@ -164,7 +167,7 @@ fun MainCharacterDetail(characterModel: CharacterModel) {
                 color = Color.White,
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.SansSerif,
+                fontFamily = CharacterDetailsFont,
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
         }
@@ -193,15 +196,14 @@ fun CharacterDetailInfo(characterModel: CharacterModel) {
 @Composable
 fun CharacterDescription(characterModel: CharacterModel) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         TextTitle("DESCRIPTION")
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = characterModel.description,
             fontSize = 14.sp,
-            style = MaterialTheme.typography.bodyMedium,
+            fontFamily = CharacterDescriptionFont,
             color = Gray,
             modifier = Modifier.padding(start = 16.dp)
         )
@@ -209,15 +211,20 @@ fun CharacterDescription(characterModel: CharacterModel) {
 }
 
 @Composable
-fun CharacterPower(characterModel: CharacterModel) {
-    Row(
+fun CharacterAffiliation(characterModel: CharacterModel) {
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+            .padding(top = 40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        IconText(text = "Base KI", icon = Res.drawable.ic_empty_power, amount = characterModel.ki)
-        IconText(text = "Max KI", icon = Res.drawable.ic_full_power, amount = characterModel.maxKi)
+        Text(
+            text = characterModel.affiliation.uppercase(),
+            fontSize = 42.sp,
+            fontFamily = CharacterDetailsFont,
+            fontWeight = FontWeight.Bold,
+            color = Orange
+        )
     }
 }
 
@@ -273,10 +280,11 @@ fun CharacterTransformationBottomSheet(
             } else {
                 Box(
                     modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center) {
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(
                         text = "$characterName no tiene transformaciones",
-                        style = MaterialTheme.typography.bodyMedium,
+                        fontFamily = CharacterDescriptionFont,
                         textAlign = TextAlign.Center
                     )
                 }
