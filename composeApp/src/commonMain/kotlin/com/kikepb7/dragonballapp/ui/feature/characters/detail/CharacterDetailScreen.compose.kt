@@ -1,6 +1,5 @@
 package com.kikepb7.dragonballapp.ui.feature.characters.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -42,15 +41,14 @@ import com.kikepb7.dragonballapp.domain.model.TransformationModel
 import com.kikepb7.dragonballapp.ui.common.components.CustomFloatingActionButton
 import com.kikepb7.dragonballapp.ui.common.components.IconText
 import com.kikepb7.dragonballapp.ui.common.components.TextTitle
+import com.kikepb7.dragonballapp.ui.theme.Gray
 import com.kikepb7.dragonballapp.ui.theme.Orange
 import dragonballapp.composeapp.generated.resources.Res
-import dragonballapp.composeapp.generated.resources.ic_background_3
 import dragonballapp.composeapp.generated.resources.ic_dragon_ball_transformation
 import dragonballapp.composeapp.generated.resources.ic_empty_power
 import dragonballapp.composeapp.generated.resources.ic_full_power
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -80,11 +78,11 @@ fun CharacterDetailScreen(
                     .fillMaxWidth()
                     .height(400.dp)
             ) {
-                Image(
+                AsyncImage(
+                    model = characterDetail.character?.originPlanetModel?.image,
+                    contentDescription = "${characterDetail.character?.originPlanetModel?.name} image",
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(resource = Res.drawable.ic_background_3),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = "Background header"
+                    contentScale = ContentScale.Crop
                 )
                 characterDetail.character?.characterModel?.let { CharacterPower(characterModel = it) }
                 Box(
@@ -199,12 +197,12 @@ fun CharacterDescription(characterModel: CharacterModel) {
             .fillMaxSize()
     ) {
         TextTitle("DESCRIPTION")
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = characterModel.description,
-            fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
-            color = Color.Black,
+            style = MaterialTheme.typography.bodyMedium,
+            color = Gray,
             modifier = Modifier.padding(start = 16.dp)
         )
     }
