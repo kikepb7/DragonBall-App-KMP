@@ -1,5 +1,6 @@
 package com.kikepb7.dragonballapp.ui.feature.characters.detail
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -28,7 +29,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,14 +44,19 @@ import com.kikepb7.dragonballapp.domain.model.TransformationModel
 import com.kikepb7.dragonballapp.ui.common.components.CustomFloatingActionButton
 import com.kikepb7.dragonballapp.ui.common.components.TextTitle
 import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
+import com.kikepb7.dragonballapp.ui.theme.Black
 import com.kikepb7.dragonballapp.ui.theme.CharacterDescriptionFont
 import com.kikepb7.dragonballapp.ui.theme.CharacterDetailsFont
 import com.kikepb7.dragonballapp.ui.theme.Gray
 import com.kikepb7.dragonballapp.ui.theme.Orange
+import dragonballapp.composeapp.generated.resources.Digit
 import dragonballapp.composeapp.generated.resources.Res
 import dragonballapp.composeapp.generated.resources.ic_dragon_ball_transformation
+import dragonballapp.composeapp.generated.resources.radar_v2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.Font
+import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -86,7 +94,7 @@ fun CharacterDetailScreen(
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
-                characterDetail.character?.characterModel?.let { CharacterAffiliation(characterModel = it) }
+                RadarKi(characterModel = characterModel)
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -100,7 +108,6 @@ fun CharacterDetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .verticalScroll(scrollState)
-                    .padding(16.dp)
             ) {
                 characterDetail.character?.characterModel?.let { CharacterDetailInfo(characterModel = it) }
             }
@@ -181,22 +188,29 @@ fun CharacterDetailInfo(characterModel: CharacterModel) {
             .fillMaxSize()
             .padding(8.dp)
     ) {
+        CharacterAffiliation(characterModel = characterModel)
         CharacterDescription(characterModel = characterModel)
-        Text(
-            text = "Gender: ${characterModel.gender}",
-            color = Color.Black
-        )
-        Text(
-            text = "Affiliation: ${characterModel.affiliation}",
-            color = Color.Black
-        )
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = "Gender: ${characterModel.gender}",
+                color = Color.Black
+            )
+            Text(
+                text = "Affiliation: ${characterModel.affiliation}",
+                color = Color.Black
+            )
+        }
     }
 }
 
 @Composable
 fun CharacterDescription(characterModel: CharacterModel) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         TextTitle("DESCRIPTION")
         Spacer(modifier = Modifier.height(8.dp))
@@ -289,6 +303,42 @@ fun CharacterTransformationBottomSheet(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun RadarKi(characterModel: CharacterModel) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(),
+        contentAlignment = Alignment.CenterEnd
+    ) {
+        Image(
+            painter = painterResource(Res.drawable.radar_v2),
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .size(200.dp)
+                .graphicsLayer(alpha = 0.8f),
+            contentDescription = "Radar Ki image"
+        )
+
+        Column(
+            modifier = Modifier.padding(bottom = 40.dp, end = 20.dp)
+        ) {
+            Text(
+                text = "MIN: ${characterModel.ki}",
+                fontSize = 16.sp,
+                fontFamily = FontFamily(Font(Res.font.Digit)),
+                color = Black
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "MAX: ${characterModel.maxKi}",
+                fontSize = 16.sp,
+                fontFamily = FontFamily(Font(Res.font.Digit)),
+                color = Black
+            )
         }
     }
 }
