@@ -10,6 +10,7 @@ import com.kikepb7.dragonballapp.ui.feature.battles.BattlesScreen
 import com.kikepb7.dragonballapp.ui.feature.characters.CharactersScreenView
 import com.kikepb7.dragonballapp.ui.feature.characters.detail.CharacterDetailScreen
 import com.kikepb7.dragonballapp.ui.feature.home.HomeScreenView
+import com.kikepb7.dragonballapp.ui.feature.planets.PlanetScreenView
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -39,6 +40,10 @@ fun NavigationWrapper() {
             val characterDetailEncoding = navBackStackEntry.toRoute<CharacterDetail>()
             val characterModel = Json.decodeFromString<CharacterModel>(string = characterDetailEncoding.characterModel)
             CharacterDetailScreen(characterModel = characterModel)
+        }
+
+        composable(route = Routes.Planets.route) {
+            PlanetScreenView()
         }
 
         composable(route = Routes.Battles.route) {

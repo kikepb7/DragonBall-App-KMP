@@ -2,7 +2,9 @@ package com.kikepb7.dragonballapp.di
 
 import com.kikepb7.dragonballapp.data.datasource.remote.ApiService
 import com.kikepb7.dragonballapp.data.datasource.remote.feature.characters.repository.CharacterRepositoryImpl
+import com.kikepb7.dragonballapp.data.datasource.remote.feature.planets.repository.PlanetReporisotyImpl
 import com.kikepb7.dragonballapp.domain.feature.character.CharacterRepository
+import com.kikepb7.dragonballapp.domain.feature.planet.PlanetRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -30,4 +32,5 @@ val dataModule = module {
 
     factoryOf(::ApiService)
     factory<CharacterRepository> { CharacterRepositoryImpl(api = get()) }
+    factory<PlanetRepository> { PlanetReporisotyImpl(api = get()) }
 }

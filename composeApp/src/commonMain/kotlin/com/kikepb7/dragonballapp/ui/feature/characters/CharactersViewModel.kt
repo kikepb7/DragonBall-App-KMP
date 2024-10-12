@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class CharactersViewModel(
     private val charactersRepository: CharacterRepository
-) : ViewModel() {
+): ViewModel() {
 
     private val _state = MutableStateFlow(CharactersState())
     val state: StateFlow<CharactersState?> = _state.asStateFlow()
@@ -31,7 +31,6 @@ class CharactersViewModel(
             }
         }
     }
-
 }
 
 data class CharactersState(

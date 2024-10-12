@@ -38,7 +38,6 @@ data class CharacterDto(
     }
 
     fun dtoToCharacterDetailModel(): CharacterDetailModel {
-
         return CharacterDetailModel(
             characterModel = CharacterModel(
                 id = id,
