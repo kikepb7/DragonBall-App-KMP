@@ -27,7 +27,7 @@ import kotlin.math.absoluteValue
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun PlanetScreenView() {
+fun PlanetsScreenView() {
     val planetsViewModel = koinViewModel<PlanetsViewModel>()
     val state by planetsViewModel.state.collectAsState()
 

@@ -20,6 +20,10 @@ val BackGroundHomePrimaryColor
     @Composable
     get() = if (isSystemInDarkTheme()) DarkBlue else LightBlue
 
+val TextDescriptionColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Gray else Black
+
 
 val Orange = Color(0xFFFF8C00)
 val LightOrange = Color(0xFFFFC176)

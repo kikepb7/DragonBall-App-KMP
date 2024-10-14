@@ -47,8 +47,8 @@ import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.Black
 import com.kikepb7.dragonballapp.ui.theme.CharacterDescriptionFont
 import com.kikepb7.dragonballapp.ui.theme.CharacterDetailsFont
-import com.kikepb7.dragonballapp.ui.theme.Gray
 import com.kikepb7.dragonballapp.ui.theme.Orange
+import com.kikepb7.dragonballapp.ui.theme.TextDescriptionColor
 import dragonballapp.composeapp.generated.resources.Digit
 import dragonballapp.composeapp.generated.resources.Res
 import dragonballapp.composeapp.generated.resources.ic_dragon_ball_transformation
@@ -65,7 +65,6 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun CharacterDetailScreen(
     characterModel: CharacterModel
 ) {
-
     val characterDetailViewModel = koinViewModel<CharacterDetailViewModel>()
     val characterDetailState by characterDetailViewModel.state.collectAsStateWithLifecycle()
 
@@ -218,7 +217,7 @@ fun CharacterDescription(characterModel: CharacterModel) {
             text = characterModel.description,
             fontSize = 14.sp,
             fontFamily = CharacterDescriptionFont,
-            color = Gray,
+            color = TextDescriptionColor,
             modifier = Modifier.padding(start = 16.dp)
         )
     }
@@ -229,7 +228,7 @@ fun CharacterAffiliation(characterModel: CharacterModel) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 40.dp),
+            .padding(top = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(

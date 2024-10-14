@@ -10,7 +10,7 @@ import com.kikepb7.dragonballapp.ui.feature.battles.BattlesScreen
 import com.kikepb7.dragonballapp.ui.feature.characters.CharactersScreenView
 import com.kikepb7.dragonballapp.ui.feature.characters.detail.CharacterDetailScreen
 import com.kikepb7.dragonballapp.ui.feature.home.HomeScreenView
-import com.kikepb7.dragonballapp.ui.feature.planets.PlanetScreenView
+import com.kikepb7.dragonballapp.ui.feature.planets.PlanetsScreenView
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -43,7 +43,7 @@ fun NavigationWrapper() {
         }
 
         composable(route = Routes.Planets.route) {
-            PlanetScreenView()
+            PlanetsScreenView()
         }
 
         composable(route = Routes.Battles.route) {
