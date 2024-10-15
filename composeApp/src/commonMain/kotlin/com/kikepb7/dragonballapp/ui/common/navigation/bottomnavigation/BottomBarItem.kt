@@ -29,7 +29,7 @@ sealed class BottomBarItem {
     ): BottomBarItem()
 
     data class Planets(
-        override val route: String = Routes.Characters.route,
+        override val route: String = Routes.Planets.route,
         override val title: String = "PLANETS",
         override val icon: @Composable () -> Unit = {
             Icon(

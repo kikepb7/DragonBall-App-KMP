@@ -17,9 +17,11 @@ fun BottomNavigationWrapper(
     navController: NavHostController,
     mainNavController: NavHostController
 ) {
+    // TODO --> fix startDestination, change by the one who choice
     NavHost(navController = navController, startDestination = Routes.Home.route) {
         composable(route = Routes.Characters.route) {
             CharactersScreenView(
+                mainNavController = mainNavController,
                 navigateToDetail = { characterModel ->
                     val encode = Json.encodeToString(value = characterModel)
                     mainNavController.navigate(route = CharacterDetail(characterModel = encode))

@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,8 +29,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
+import com.kikepb7.dragonballapp.ui.common.components.BottomBarNavigation
+import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomBarItem.Battles
+import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomBarItem.Characters
+import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomBarItem.Planets
+import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomNavigationWrapper
 import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.Blue
 import com.kikepb7.dragonballapp.ui.theme.Orange
@@ -42,18 +50,40 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun CharactersScreenView(
+    mainNavController: NavHostController,
     navigateToDetail: (CharacterModel) -> Unit
 ) {
+    val navController = rememberNavController()
+    val items = listOf(Characters(), Battles(), Planets())
     val characterViewModel = koinViewModel<CharactersViewModel>()
     val state by characterViewModel.state.collectAsStateWithLifecycle()
     val listState = characterViewModel.scrollState.collectAsStateWithLifecycle().value
 
-    Column(
-        modifier = Modifier
-            .background(color = BackGroundHomePrimaryColor)
-    )
-    {
-        state?.characters?.let { CharactersGridList(characters = it, onItemSelected = navigateToDetail, listState = listState) }
+    Scaffold(
+        topBar = {},
+        bottomBar = {
+            BottomBarNavigation(
+                items = items,
+                navController = navController
+            )
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .background(color = BackGroundHomePrimaryColor)
+        )
+        {
+            state?.characters?.let { CharactersGridList(characters = it, onItemSelected = navigateToDetail, listState = listState) }
+        }
+
+        Box(
+            modifier = Modifier.padding(paddingValues = padding)
+        ) {
+            BottomNavigationWrapper(
+                navController = navController,
+                mainNavController = mainNavController
+            )
+        }
     }
 }
 

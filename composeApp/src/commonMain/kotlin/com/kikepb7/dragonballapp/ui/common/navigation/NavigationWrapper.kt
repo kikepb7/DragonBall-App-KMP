@@ -29,6 +29,7 @@ fun NavigationWrapper() {
 
         composable(route = Routes.Characters.route) {
             CharactersScreenView(
+                mainNavController = mainNavController,
                 navigateToDetail = { characterModel ->
                     val encode = Json.encodeToString(value = characterModel)
                     mainNavController.navigate(route = CharacterDetail(characterModel = encode))
