@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
+import com.kikepb7.dragonballapp.ui.theme.BackGroundPrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.ButtonHomePrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.IconButtonHomePrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.TextButtonHomePrimaryColor
@@ -45,7 +45,7 @@ fun HomeScreenView(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = BackGroundHomePrimaryColor)
+            .background(color = BackGroundPrimaryColor)
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center
     ) {

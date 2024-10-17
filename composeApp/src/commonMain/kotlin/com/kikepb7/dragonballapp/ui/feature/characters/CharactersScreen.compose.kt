@@ -33,12 +33,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
-import com.kikepb7.dragonballapp.ui.common.components.BottomBarNavigation
 import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomBarItem.Battles
 import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomBarItem.Characters
 import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomBarItem.Planets
-import com.kikepb7.dragonballapp.ui.common.navigation.bottomnavigation.BottomNavigationWrapper
-import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
+import com.kikepb7.dragonballapp.ui.theme.BackGroundPrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.Blue
 import com.kikepb7.dragonballapp.ui.theme.Orange
 import dragonballapp.composeapp.generated.resources.Res
@@ -62,28 +60,28 @@ fun CharactersScreenView(
     Scaffold(
         topBar = {},
         bottomBar = {
-            BottomBarNavigation(
-                items = items,
-                navController = navController
-            )
+//            BottomBarNavigation(
+//                items = items,
+//                navController = navController
+//            )
         }
     ) { padding ->
         Column(
             modifier = Modifier
-                .background(color = BackGroundHomePrimaryColor)
+                .background(color = BackGroundPrimaryColor)
         )
         {
             state?.characters?.let { CharactersGridList(characters = it, onItemSelected = navigateToDetail, listState = listState) }
         }
 
-        Box(
-            modifier = Modifier.padding(paddingValues = padding)
-        ) {
-            BottomNavigationWrapper(
-                navController = navController,
-                mainNavController = mainNavController
-            )
-        }
+//        Box(
+//            modifier = Modifier.padding(paddingValues = padding)
+//        ) {
+//            BottomNavigationWrapper(
+//                navController = navController,
+//                mainNavController = mainNavController
+//            )
+//        }
     }
 }
 

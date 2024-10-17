@@ -16,7 +16,7 @@ val IconButtonHomePrimaryColor
     @Composable
     get() = if (isSystemInDarkTheme()) Gray else Black
 
-val BackGroundHomePrimaryColor
+val BackGroundPrimaryColor
     @Composable
     get() = if (isSystemInDarkTheme()) DarkBlue else LightBlue
 
@@ -37,3 +37,19 @@ val DigitYellow = Color(0xFFFFE503)
 //val LightBlue = Color(0xFFADD8E6)
 val Gray = Color(0xFFE7E5E8)
 val Yellow = Color(0xFFFBBC42)
+
+
+
+// Main Colors
+val blueMain = Color(0xFF1C4505)
+val orangeMain = Color(0xFFFF8C00)
+val blackMain = Color(0xFF01080A)
+val grayMain = Color(0xFFE7E5E8)
+val yellowMain = Color(0xFFFBBC42)
+
+// Complements Colors
+val greenComplement = Color(0xFF0B3D02)
+val lightPinkComplement = Color(0xFFFFC0CB)
+val darkGrayComplement = Color(0xFF1A1A1A)
+val darkBlueComplement = Color(0xFF2A2E36)
+val darkPurpleComplement = Color(0xFF5C4B8A)

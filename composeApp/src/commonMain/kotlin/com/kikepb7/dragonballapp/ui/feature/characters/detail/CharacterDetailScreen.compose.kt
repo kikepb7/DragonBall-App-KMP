@@ -43,7 +43,7 @@ import com.kikepb7.dragonballapp.domain.feature.character.model.CharacterModel
 import com.kikepb7.dragonballapp.domain.model.TransformationModel
 import com.kikepb7.dragonballapp.ui.common.components.CustomFloatingActionButton
 import com.kikepb7.dragonballapp.ui.common.components.TextTitle
-import com.kikepb7.dragonballapp.ui.theme.BackGroundHomePrimaryColor
+import com.kikepb7.dragonballapp.ui.theme.BackGroundPrimaryColor
 import com.kikepb7.dragonballapp.ui.theme.Black
 import com.kikepb7.dragonballapp.ui.theme.CharacterDescriptionFont
 import com.kikepb7.dragonballapp.ui.theme.CharacterDetailsFont
@@ -80,7 +80,7 @@ fun CharacterDetailScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = BackGroundHomePrimaryColor)
+                .background(color = BackGroundPrimaryColor)
         ) {
             Box(
                 modifier = Modifier
